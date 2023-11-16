@@ -58,13 +58,13 @@ export default defineComponent({
       }
     },
     logout: function () {
-      this.$store.commit('logout')
+      this.$store.commit('LOGOUT')
 
     },
     toggleTheme() {
 
       this.theme.global.name.value = this.theme.global.current.value.dark ? 'myCustomLightTheme' : 'myCustomDarkTheme'
-      this.icon = this.theme.global.current.value.dark ? 'md-pencil' : 'mdi-cancel'
+      this.icon = this.theme.global.current.value.dark ? 'md-moon' : 'mdi-cancel'
     },
       mounted() {
     this.theme = useTheme()
@@ -73,7 +73,9 @@ export default defineComponent({
 
   data() {
     return {
-      drawer: true
+      drawer: true,
+      icon: 'mdi-cancel',
+      theme:''
     }
   },
 

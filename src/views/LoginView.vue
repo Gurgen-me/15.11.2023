@@ -28,16 +28,27 @@ export default defineComponent({
       },
     ],
   }),
-  methods: {
-    loginFunc: function () {
-      this.$store.commit('login', { login: this.login, password: this.pass });
-      if (this.$store.state.usersState.error != '') {
-        console.log(this.$store.state.usersState.error)
-        this.errMsg = 'Произошла ошибка!'
-      } else {
-        router.push('/');
+  computed: {
+    credentials: function () {
+      return {
+        login: this.login,
+        password: this.pass
       }
-      
+    }
+  },
+  methods: {
+    loginFunc: async function () {
+      let res = await this.$store.dispatch('login', this.credentials);
+      try {
+        if (!res) {
+          this.$router.push('/')
+          console.log(this.$store.state.userState.cur_user)
+        } else {
+          this.errMsg = 'Не удалось войти, проверьте реквизиты для входа!'
+        }
+      } catch (error) {
+        this.errMsg = 'Не удалось войти, проверьте реквизиты для входа!'
+      }
 
     },
     enterAsAdmin: function () {
@@ -51,7 +62,6 @@ export default defineComponent({
       router.push('/');
     }
   },
-
 })
 </script>
 <style>

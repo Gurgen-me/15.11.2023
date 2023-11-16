@@ -1,6 +1,6 @@
 <template>
-    <AdminHomeView v-if="userType == 'admin'"  />
-    <UserHomeView v-if="userType == 'user'"  />
+    <AdminHomeView v-if="userType == 'admin'" />
+    <UserHomeView v-if="userType == 'user'" />
 </template>
 
 <script lang="ts">
